@@ -1,18 +1,18 @@
  # LINEAR INTEGRATED CIRCUITS - EXPT- 01
 ## DC,AC and Transcient analysis of CS amplifier
 
-### Introduction 
+##  Introduction 
 The Common Source Amplifier is a widely used MOSFET-based amplifier configuration in analog electronics. It plays a crucial role in applications such as audio amplification, signal processing, and communication systems by providing significant voltage gain.  
 This experiment focuses on analyzing the CS amplifier through DC, AC, and Transient analysis. DC analysis determines the biasing conditions to ensure stable operation in the active region. AC analysis evaluates key parameters such as voltage gain, input impedance, and frequency response to assess amplification performance. Transient analysis examines the amplifier’s time-domain response, analyzing its behavior with varying input signals.  
 *Objective:* : 
 To analyze the DC biasing, AC gain, and transient response of a Common Source (CS) Amplifier using a MOSFET and understand its role in signal amplification. This includes evaluating voltage gain, impedance, frequency response, and time-domain behavior for practical applications.
-### Key components used and their roles
+##  Key components used and their roles
 MOSFET – Acts as the main amplifying element, controlling current flow.
 
 Resistors – Set the biasing conditions and stabilize the operating point.
 
 Power Supply – Provides the necessary DC voltage for MOSFET operation.
-### Circuit diagram 
+##  Circuit diagram 
 ![Screenshot 2025-02-16 193317](https://github.com/user-attachments/assets/bfa75dd5-a0d9-4e70-b342-1eb4afa4a3fc)
 
 V1: AC input signal (SINE wave with 0.9V DC offset and 50mV amplitude at 1kHz).
@@ -23,7 +23,7 @@ R1: Load resistor (1kΩ) to convert the amplified current signal into a voltage 
 
 M1: NMOS transistor operating as an amplifier.
 
-### Components details :
+##  Components details :
 The circuit performs DC, AC, and Transient analysis, as specified by the simulation commands (.op, .ac, .tran). It amplifies the small input signal and produces an inverted output at V_out.
 The circuit uses the TSMC 180nm technology library (tsmc018.lib), which provides accurate MOSFET model parameters for simulation. This library contains real-world transistor characteristics, such as threshold voltage, mobility, and capacitances, ensuring a precise representation of MOSFET behavior in analog circuits. By including this library, the simulation accurately reflects the amplification, frequency response, and transient behavior of the Common Source (CS) Amplifier.
  
@@ -52,7 +52,7 @@ Amplitude: 50mV (small input signal to be amplified)
 
 Frequency: 1kHz 
 
-### DC analysis
+##  DC analysis
 
 
 ![WhatsApp Image 2025-02-15 at 12 48 09_c2827f40](https://github.com/user-attachments/assets/3ae6f788-9978-4fd6-9b3f-009ee7884ef3)
@@ -90,13 +90,13 @@ V_DS ≥ V_GS-V_T
 
 Since 1.8V is greater than 0.53375V, the MOSFET is in saturation. 
 
-### Transient analysis
+##  Transient analysis
 
 ![Screenshot 2025-02-15 125526](https://github.com/user-attachments/assets/b537b924-ce1c-4c41-905e-7fb0eccc3290)
 
 Transient analysis examines the time-domain response of the CS amplifier to an AC input signal (1kHz sine wave). It helps analyze amplification, signal distortion, and dynamic performance by simulating real-time behavior (`.tran 5m`).
 
-### AC analysis
+##  AC analysis
 
 ![WhatsApp Image 2025-02-15 at 13 03 11_c2339011](https://github.com/user-attachments/assets/0443722c-5f7c-4a5f-97f1-7b706b8d0a96)
 
@@ -108,9 +108,11 @@ Amplitude: 50mV
 
 DC Offset: 0.9V
 
+Voltage gain = 
+
 This analysis determines the gain, bandwidth, and frequency response, helping evaluate the amplifier’s performance over different frequencies.
 
-### Inference
+##  Inference
 
 DC Analysis: The MOSFET operates in saturation, with w/l controlling 
  I_d and transconductance. Proper biasing ensures stable operation.
@@ -124,14 +126,14 @@ AC Analysis: Gain depends on gm amd w/l A larger w/l  improves gain but reduces 
 
 ## CS Amplifier with PMOS Load
 
-### Introduction 
+##  Introduction 
 
 In a Common Source (CS) Amplifier, a PMOS transistor can replace the traditional resistive load. Using a PMOS transistor improves the amplifier’s performance by increasing the output resistance, which results in higher voltage gain and better linearity. This configuration also enhances power efficiency and allows for better tuning and flexibility in design. PMOS load CS amplifiers are particularly useful in high-gain analog circuits where improved performance and efficiency are needed, such as in operational amplifiers.
 
 *Objective:*
 To analyze the performance of a Common Source Amplifier with a PMOS load, focusing on improvements in gain, linearity, and efficiency.
 
-### Key components used and their roles
+##  Key components used and their roles
 
 PMOS Transistor: Acts as the active load, replacing the resistor to improve voltage gain and linearity.
 
@@ -141,7 +143,7 @@ Biasing Resistors: Set the appropriate operating point for the transistors to en
 
 Power Supply: Provides the required voltage for circuit operation.
  
- ### Circuit diagram 
+ ##  Circuit diagram 
 
  <img width="960" alt="image" src="https://github.com/user-attachments/assets/8a54fec1-c4ce-4754-9ddc-506313b5febf" />
 
@@ -159,7 +161,7 @@ The gate is biased at 0.3V using V3.
 
 The drain is connected to R1 (1kΩ) load, which is then connected to ground.
 
-## Components details :
+##  Components details :
 The circuit performs DC, AC, and Transient analysis, as specified by the simulation commands (.op, .ac, .tran). It amplifies the small input signal and produces an inverted output at V_out.
 The circuit uses the TSMC 180nm technology library (tsmc018.lib), which provides accurate MOSFET model parameters for simulation.
 
@@ -173,15 +175,17 @@ Length (𝐿) = 39um
 
 Width (w) = 33um
 
+Threshold Voltage (v_th) = 0.3662473V
+
 PMOS
 
-MODEL = CMOSN
+MODEL = CMOSP
 
 Length (𝐿) = 180nm
 
 Width (w) = 15um
 
-Threshold Voltage (v_th) = 0.3662473V
+Threshold Voltage (v_th) = -0.3662473V
 
 Power Supply:
 
@@ -196,7 +200,7 @@ Amplitude = 50mV
 
 Frequency = 1kHz
 
-### DC analysis
+##  DC analysis
 
 if the power rating(power dissipiation across the resistor) is 50uW. given supply voltage is 1.8V .then the current through the resistor is given by :
 
@@ -213,15 +217,25 @@ I_d = power/Voltage = 50u/1.8 = 27.7uA
 |  35u    |  39um   |  27.738uA |
 
 
-TO Calculate V_GS:
+TO Calculate V_SG:(PMOS)
 
-V_GS = V_G - V_S
-V_GS = 0.3 V - 1.8 V
-V_GS = -1.5 V
+V_SG = V_G - V_S
+V_SG = 1.8 V - 0.3 V
+V_SG = 1.5V
 
-To Check Condition 1 (V_GS ≤ V_TH):
+To Check Condition 1 (V_SG ≥ V_TH):
 
--1.5 V ≤ -0.3662473 V (Condition satisfied)
+1.5 V ≥ 0.3662473 V (Condition satisfied)
+
+V_DS = 1.79V
+
+V_SG  ≥ V_TH AND V_SD  ≥ V_OV
+
+
+PMOS IS IN SATURATION REGION
+
+
+NMOS
 
 V_DS ≥ V_GS-V_T
 
@@ -230,6 +244,7 @@ V_GS = V_G - V_S = 0.9V−0V = 0.9V
 V_DS = V_D - V_S = 1.8V−0V = 1.8V
 
 For saturation:
+
 V_DS ≥ V_GS-V_T
 
 1.8 ≥ 0.9V - 0.36624V
@@ -238,19 +253,20 @@ V_DS ≥ V_GS-V_T
 
 Since 1.8V is greater than 0.53375V, the MOSFET is in saturation. 
 
-### Transient analysis
+##  Transient analysis
 
 <img width="960" alt="image" src="https://github.com/user-attachments/assets/a8f46386-1346-42e7-88a8-ced3893ecef8" />
 
 Transient analysis examines the CS amplifier's time-domain response to a 1kHz, 0.9V sine wave input (.tran 5m), aiming to characterize amplification, distortion, and dynamic performance.  However, due to potential DC operating point issues with the PMOS (M2), as detailed in the DC analysis section
 
-### AC analysis
+##  AC analysis
 
 <img width="960" alt="image" src="https://github.com/user-attachments/assets/732b2466-b104-4ff4-b002-8624a873fd33" />
 
 AC analysis (.ac dec 20 0.1 1T) characterized the CS amplifier's frequency response.  A 0.9V AC input was used. Bode plots (gain and phase) will be presented. Key parameters (midband gain, cutoff frequencies, bandwidth) will be identified.
+VOLTAGE GAIN IS 42db
 
-### INFERENCE
+##  INFERENCE
 
 DC Analysis:  Reveals a potential PMOS biasing issue, with V_out unexpectedly high (1.76V) for V_G = 0.3V. This casts doubt on the validity of the identified operating regions for both transistors.  The primary inference is the need to correct the DC bias.
 
