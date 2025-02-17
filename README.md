@@ -120,7 +120,7 @@ w/l increases gain but raises power consumption and potential distortion.
 
 AC Analysis: Gain depends on gm amd w/l A larger w/l  improves gain but reduces bandwidth, while a smaller w/l enhances stability.
 
-# EXPERIMENT NO - 02
+# CIRCUIT - 02
 
 ## CS Amplifier with PMOS Load
 
@@ -143,8 +143,7 @@ Power Supply: Provides the required voltage for circuit operation.
  
  ### Circuit diagram 
 
- <img width="960" alt="image" src="https://github.com/user-attachments/assets/5eb55346-a3ef-4279-9a88-6fb518b107d9" />
-
+ <img width="960" alt="image" src="https://github.com/user-attachments/assets/8a54fec1-c4ce-4754-9ddc-506313b5febf" />
 
 V1: AC input signal (SINE wave with 0.9V DC offset and 50mV amplitude at 1kHz).
 
@@ -156,25 +155,38 @@ M1: NMOS transistor operating as an amplifier
 
 The source of the PMOS (M2) is connected to V2 (1.8V).
 
-The gate is biased at 1.3V using V3.
+The gate is biased at 0.3V using V3.
 
 The drain is connected to R1 (1kΩ) load, which is then connected to ground.
 
 ## Components details :
+The circuit performs DC, AC, and Transient analysis, as specified by the simulation commands (.op, .ac, .tran). It amplifies the small input signal and produces an inverted output at V_out.
+The circuit uses the TSMC 180nm technology library (tsmc018.lib), which provides accurate MOSFET model parameters for simulation.
 
 MOSFET:
 
-Type: NMOS/PMOS
+NMOS
 
-Length (𝐿) = 500nm
+MODEL = CMOSN
 
-Width (w) = 490nm
+Length (𝐿) = 39um
+
+Width (w) = 33um
+
+PMOS
+
+MODEL = CMOSN
+
+Length (𝐿) = 180nm
+
+Width (w) = 15um
 
 Threshold Voltage (v_th) = 0.3662473V
 
 Power Supply:
 
-v_dd = 1.8V
+v_dd = 1.8V 
+Provides the necessary drain-source voltage for MOSFET operation.
 
 Type: Sine wave
 
@@ -183,5 +195,67 @@ Offset Voltage = 0.9V
 Amplitude = 50mV
 
 Frequency = 1kHz
+
+### DC analysis
+
+if the power rating(power dissipiation across the resistor) is 50uW. given supply voltage is 1.8V .then the current through the resistor is given by :
+
+I_d = power/Voltage = 50u/1.8 = 27.7uA
+
+<img width="960" alt="image" src="https://github.com/user-attachments/assets/c1e9cd18-fa56-4b40-9832-fff6e8af9753" />
+
+
+| Width   | Length  | Current   |
+|-------  |-------- |---------  |
+|  20u    |  39um   |  15.6438uA|
+|  45u    |  39um   |  35.219uA |
+|  15u    |  39um   |  11.7288uA|
+|  35u    |  39um   |  27.738uA |
+
+
+TO Calculate V_GS:
+
+V_GS = V_G - V_S
+V_GS = 0.3 V - 1.8 V
+V_GS = -1.5 V
+
+To Check Condition 1 (V_GS ≤ V_TH):
+
+-1.5 V ≤ -0.3662473 V (Condition satisfied)
+
+V_DS ≥ V_GS-V_T
+
+V_GS = V_G - V_S = 0.9V−0V = 0.9V
+
+V_DS = V_D - V_S = 1.8V−0V = 1.8V
+
+For saturation:
+V_DS ≥ V_GS-V_T
+
+1.8 ≥ 0.9V - 0.36624V
+
+1.8V ≥ 0.5337V
+
+Since 1.8V is greater than 0.53375V, the MOSFET is in saturation. 
+
+### Transient analysis
+
+<img width="960" alt="image" src="https://github.com/user-attachments/assets/a8f46386-1346-42e7-88a8-ced3893ecef8" />
+
+Transient analysis examines the CS amplifier's time-domain response to a 1kHz, 0.9V sine wave input (.tran 5m), aiming to characterize amplification, distortion, and dynamic performance.  However, due to potential DC operating point issues with the PMOS (M2), as detailed in the DC analysis section
+
+### AC analysis
+
+<img width="960" alt="image" src="https://github.com/user-attachments/assets/732b2466-b104-4ff4-b002-8624a873fd33" />
+
+AC analysis (.ac dec 20 0.1 1T) characterized the CS amplifier's frequency response.  A 0.9V AC input was used. Bode plots (gain and phase) will be presented. Key parameters (midband gain, cutoff frequencies, bandwidth) will be identified.
+
+### INFERENCE
+
+DC Analysis:  Reveals a potential PMOS biasing issue, with V_out unexpectedly high (1.76V) for V_G = 0.3V. This casts doubt on the validity of the identified operating regions for both transistors.  The primary inference is the need to correct the DC bias.
+
+AC Analysis: Shows a frequency response, but the specific values of gain, cutoff frequencies, and bandwidth are unreliable due to the suspected DC bias problem.  The observed AC behavior should not be used for design purposes until the DC operating point is corrected.
+
+Transient Analysis:  Indicates a distorted output waveform, likely a consequence of the incorrect DC operating point.  Any observations about amplification or dynamic behavior are unreliable at this stage.
 
 
