@@ -127,6 +127,40 @@ $$
 \text{Gain (dB)} = 20 \log(2.3009) = 7.234 \text{ dB}
 $$
 
+## DC Sweep
+A **DC sweep analysis** of a differential amplifier examines how the **output voltage** responds to varying **DC input voltages**, revealing its **transfer characteristics, gain, linearity, and voltage ranges**. It helps determine the **operating point, bias conditions, and performance in low-frequency applications**, while also identifying **non-linearities and saturation effects**.
+![WhatsApp Image 2025-03-08 at 21 31 25_f9f7c8ad](https://github.com/user-attachments/assets/a2b9d5e0-665f-4e75-b2a3-18e191d9561e)   
+
+## Common-Mode Voltage Calculations
+
+### Minimum Common-Mode Input Voltage (Vicm_min)
+**Equation:**  
+Vicm_min = Vth1 + Vp  
+
+**Calculation:**  
+Vicm_min = 0.474V + 0.3V  
+Vicm_min = **0.774V**  
+
+---
+
+### Maximum Common-Mode input Voltage (Vocm_max)
+**Equation:**  
+Vicm_max = Vdd - (Iss × Rd) / 2 + Vth  
+
+**Calculation:**  
+Vocm_max = 2.5V - (1.2mA × 1.833kΩ) / 2 + 0.474V  
+Vocm_max = **1.8742V**  
+
+---
+
+### Average Common-Mode Input Voltage (Vicm_avg)
+**Equation:**  
+Vicm_avg = (Vicm_min + Vicm_max) / 2  
+
+**Calculation:**  
+Vicm_avg = (0.774V + 1.8742V) / 2  
+Vicm_avg = **1.3241V**  
+
 
 ## AC analysis
 
@@ -210,6 +244,37 @@ Converting to decibels (dB):
 $$
 \text{Gain (dB)} = 20 \log(3) = 9.54 \text{ dB}
 $$
+
+## DC sweep
+
+![WhatsApp Image 2025-03-08 at 21 32 45_8a15ef75](https://github.com/user-attachments/assets/62b35d3e-8414-497b-84af-c3c2f57ddc29)
+
+**Equation:**  
+Vicm_min = Vth1 + Vp  
+
+**Calculation:**  
+Vicm_min = 0.474V + 0.3V  
+Vicm_min = **0.774V**  
+
+---
+
+### Maximum Common-Mode input Voltage (Vocm_max)
+**Equation:**  
+Vicm_max = Vdd - (Iss × Rd) / 2 + Vth  
+
+**Calculation:**  
+Vocm_max = 2.5V - (1.2mA × 1.833kΩ) / 2 + 0.474V  
+Vocm_max = **1.8742V**  
+
+---
+
+### Average Common-Mode Input Voltage (Vicm_avg)
+**Equation:**  
+Vicm_avg = (Vicm_min + Vicm_max) / 2  
+
+**Calculation:**  
+Vicm_avg = (0.774V + 1.8742V) / 2  
+Vicm_avg = **1.3241V**  
 
 ## AC analysis
 
@@ -326,6 +391,42 @@ Converting to decibels (dB):
 $$
 \text{Gain (dB)} = 20 \log(3) = 9.54 \text{ dB}
 $$
+
+## DC sweep
+<img width="960" alt="image" src="https://github.com/user-attachments/assets/75596a5e-0022-4657-9dff-b09f34d60734" />
+
+## Common-Mode Voltage Calculations
+
+### Minimum Common-Mode Output Voltage (Vocm_min)
+
+#### Equation:
+```
+Vocm_min = Vov1 + Vov3
+```
+
+### Overdrive Voltage Calculations:
+
+1. **Overdrive Voltage for M1 (Vov1):**  
+   ```
+   Vov1 = Vgd - Vth
+        = 1.00V - 0.474V
+        = 0.526V
+   ```
+
+2. **Overdrive Voltage for M3 (Vov3):**  
+   ```
+   Vov3 = Vgd - Vth
+        = 0.774V - 0.5V
+        = 0.274V
+   ```
+
+### Final Calculation for Vocm_min:
+```
+Vocm_min = Vov1 + Vov3
+         = 0.526V + 0.274V
+         = 0.8V
+```
+
 
 ## AC analysis
 
