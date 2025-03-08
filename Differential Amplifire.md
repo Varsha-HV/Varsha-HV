@@ -58,7 +58,9 @@ This setup ensures an accurate simulation of the **differential amplifier in TSM
 ## Circuit diagram
 
 <img width="684" alt="image" src="https://github.com/user-attachments/assets/8cd54078-f576-4b67-8a2c-983898b415c2" />
+ 
   **Component Values**
+ 
  - **NMOS Transistor Parameters:**  
      - **Model:** CMOSN  
      - **Length (L):** 272nm  
@@ -74,26 +76,20 @@ This setup ensures an accurate simulation of the **differential amplifier in TSM
 
 ## DC Analysis
 ![WhatsApp Image 2025-03-08 at 00 11 19_0b5e1ef0](https://github.com/user-attachments/assets/e04611f0-32be-44af-9a1d-80599ed8e4b3)
-### **DC Analysis of the Differential Amplifier**  
 
 DC analysis is performed to verify that the MOSFET operates in the **saturation region** and to determine the **DC operating point** of the transistor.  
 
 #### **Key Calculations:**  
 
-- **Bias Current (Iss):**  
-  \[
-  I_{ss} = \frac{P}{V_{DD}} = \frac{3mW}{2.5V} = 1.2mA
-  \]  
+- **Bias Current (I_ss):**  
+  *I_ss = P / V_DD = 3mW / 2.5V = 1.2mA*
 
-- **Load Resistor (R\(_D\)):**  
-  \[
-  R_D = \frac{V_{DD} - V_{OCM}}{I_{D1}} = \frac{2.5V - 1.4V}{0.6mA} = 1.833kΩ
-  \]  
+- **Load Resistor (R_D):**  
+  *R_D = (V_DD - V_OCM) / I_D1 = (2.5V - 1.4V) / 0.6mA = 1.833kΩ*
 
-- **Tail Resistor (R\(_{SS}\)):**  
-  \[
-  R_{SS} = \frac{V_P}{I_{SS}} = \frac{0.3V}{1.2mA} = 250Ω = 250Ω
-  \]  
+- **R_SS :**  
+  *R_SS = V_P / I_SS = 0.3V / 1.2mA = 250Ω*
+
 
 <img width="954" alt="image" src="https://github.com/user-attachments/assets/4a0b35d5-4148-476a-82b8-4a773f4a344a" />
 
@@ -118,17 +114,19 @@ Transient analysis examines how a differential amplifier responds to **time-vary
 A key characteristic is the **180-degree phase shift**, where an increase in input voltage results in a decrease in output voltage. This phase inversion is crucial for **balanced signal processing and noise rejection**, making differential amplifiers ideal for **audio, sensor, and communication applications**.
 
 ![WhatsApp Image 2025-03-08 at 00 12 18_e2b45fff](https://github.com/user-attachments/assets/7599235d-2457-4bb2-bcd5-3151db28511e)
+
 The voltage gain (\( A_v \)) of the differential amplifier is calculated as:  
 
-\[
+$$
 A_v = \frac{V_{out}}{V_{in}} = \frac{0.237}{0.103} = 2.3009
-\]
+$$
 
 Converting to decibels (dB):  
 
-\[
+$$
 \text{Gain (dB)} = 20 \log(2.3009) = 7.234 \text{ dB}
-\]
+$$
+
 
 ## AC analysis
 
@@ -137,8 +135,79 @@ Converting to decibels (dB):
 AC analysis evaluates the **frequency response** of a differential amplifier, determining **gain, phase shift, and bandwidth**. Unlike transient analysis, it focuses on how the amplifier performs across different frequencies. By sweeping the input frequency, one can identify **distortions and performance limits**, making AC analysis crucial for **audio and communication applications**.
 
 ![WhatsApp Image 2025-03-08 at 00 14 35_a2551e70](https://github.com/user-attachments/assets/198b20b1-037c-430e-9fa9-29bc447b67d9)
-\[
+
+$$
 \text{Gain (dB)} = 20 \log(2.3009) = 7.234 \text{ dB}
-\]
+$$
+
 Here the value obtained from the analysis exactly equal to our theoritical value 7.234 dB.
+
+# Circuit 2
+## Introduction
+<img width="722" alt="image" src="https://github.com/user-attachments/assets/603263af-7b25-4571-9057-1a6e910a2de6" />
+
+### **Modified Differential Amplifier with Current Source Biasing**  
+
+This circuit represents an **enhanced differential amplifier**, where the traditional **tail resistor (R_SS)** is replaced by a **current source (I1)**. This modification improves **bias stability**, ensuring a **more controlled and constant current** for the differential pair (**M1 and M2**). By using a current source, the amplifier achieves **better common-mode rejection** and a **more predictable operating point**, leading to **greater accuracy and stability** in signal amplification.  
+
+This configuration is particularly useful in applications requiring **precise signal processing** and **high immunity to common-mode noise**, such as **sensor interfaces and instrumentation circuits**. The amplifier retains its fundamental function of **differential signal amplification** while rejecting common-mode interference, but with improved **performance and reliability** due to current source biasing.  
+
+### **Specifications**  
+- **NMOS Transistor Model:** CMOSN  
+- **MOSFET Length (L):** 272nm  
+- **MOSFET Width (W):** 5.2µm  
+- **Load Resistors (R1, R2):** 1.833kΩ  
+- **Supply Voltage (V_DD):** 2.5V  
+- **Input AC Signal:**  
+  - DC Offset: 1.3V  
+  - Amplitude: 50mV  
+  - Frequency: 1kHz  
+
+### **Key Components**  
+- **M1 & M2:** NMOS transistors forming the differential pair, amplifying the input difference.  
+- **R1 & R2:** Load resistors that convert the amplified differential current into voltage outputs.  
+- **V3:** DC power supply providing the necessary operating voltage.  
+- **I1:** Current source that stabilizes the bias current, improving performance.  
+- **V1 & V2:** Differential input voltage sources applied to the amplifier.
+
+ ## DC Analysis
+ <img width="960" alt="image" src="https://github.com/user-attachments/assets/53a35d7e-f0fc-4885-a9e0-0beb0cdf5985" />
+
+ Iss= P/Vdd = 3mW/2.5V =1.2mA
+
+Rd=(Vdd-Vocm)/Id1 = (2.5-1.4)/0.6mA = 1.833kohm
+
+Here the resistor Rss is replaced by current Iss=1.2mA.
+
+Vds=1.10V
+
+Vgs=1.00V
+
+Vth=0.474V
+
+Vov=1.00-0.47=0.53V
+
+ Vds>Vov.
+
+So, FET is in saturation region.
+
+We can observe that even after replacing resistor Rss into current source I1 of 1.2mA,
+
+the output voltage Vout is perfectly matching with the theoritical value i.e, 1.4V.
+
+## Transient analysis
+
+<img width="956" alt="image" src="https://github.com/user-attachments/assets/7309eb43-c4ad-466f-80dc-f07031be3f2a" />
+
+We can observe 180 degree phase shift between input and output voltage, as observed in the circuit 1
+
+$$
+A_v = \frac{V_{out}}{V_{in}} = \frac{0.237}{0.103} = 2.3009
+$$
+
+Converting to decibels (dB):  
+
+$$
+\text{Gain (dB)} = 20 \log(2.3009) = 7.234 \text{ dB}
+$$
 
