@@ -202,12 +202,147 @@ the output voltage Vout is perfectly matching with the theoritical value i.e, 1.
 We can observe 180 degree phase shift between input and output voltage, as observed in the circuit 1
 
 $$
-A_v = \frac{V_{out}}{V_{in}} = \frac{0.237}{0.103} = 2.3009
+A_v = \frac{V_{out}}{V_{in}} = \frac{1.55-1.25}{1.36-1.26} = 3
 $$
 
 Converting to decibels (dB):  
 
 $$
-\text{Gain (dB)} = 20 \log(2.3009) = 7.234 \text{ dB}
+\text{Gain (dB)} = 20 \log(3) = 9.54 \text{ dB}
 $$
+
+## AC analysis
+
+![WhatsApp Image 2025-03-08 at 00 17 14_37a09490](https://github.com/user-attachments/assets/21048fac-48b2-49a0-8deb-1a3a3292975e)
+
+
+$$
+\text{Gain (dB)} = 20 \log(3) = 9.54 \text{ dB}
+$$
+
+Here the value obtained from the analysis exactly equal to our theoritical value 9.54dB.
+
+# Circuit 3
+
+## Introduction
+### **Differential Amplifier with NMOS Current Source Biasing**  
+
+This circuit showcases an **enhanced differential amplifier** where the conventional **tail resistor** is replaced with an **NMOS transistor (M3)** acting as a **current source**. This modification improves the **stability and control** of the bias current for the differential pair (**M1 and M2**), leading to a more predictable **operating point** and **enhanced common-mode rejection**.  
+
+By using an **active NMOS current source**, the circuit achieves **greater accuracy and stability** in amplifying the difference between the input signals (**V2 and V1**). This approach provides **better bias current regulation**, which is essential for applications requiring **precise signal processing** and **strong immunity to common-mode noise**. While retaining its core functionality of **differential signal amplification**, the circuit benefits from improved **performance and reliability** due to the active biasing technique.
+
+<img width="957" alt="image" src="https://github.com/user-attachments/assets/51d055ae-13c9-49f0-b10d-45c27418478e" />
+
+### **Circuit Specifications**  
+
+#### **NMOS Transistor Operation**  
+- The **NMOS transistors (M1, M2, M3)** operate in the **saturation region** to function as amplifiers.  
+
+#### **Differential Pair (M1 & M2)**  
+- **Model:** CMOSN  
+- **MOSFET Length (L):** 272nm  
+- **MOSFET Width (W):** 5.2µm  
+- **Load Resistors (R1, R2):** 1.833kΩ  
+- **Supply Voltage (VDD):** 2.5V  
+- **Input AC Signal:**  
+  - DC Offset: **1.3V**  
+  - Amplitude: **50mV**  
+  - Frequency: **1kHz**  
+
+#### **Current Source Transistor (M3)**  
+- **Model:** CMOSN  
+- **MOSFET Length (L):** 181.375nm  
+- **MOSFET Width (W):** 21.59µm  
+
+### Key Components and Their Roles
+M1 & M2: Primary NMOS transistors forming the differential pair, responsible for amplifying the difference between the input signals (V2 and V1).
+M3: NMOS transistor functioning as a current source, replacing the traditional tail resistor (R_SS) and ensuring a more stable bias current for the differential pair.
+R1 & R2: Load resistors connected to the drains of M1 and M2, converting the amplified current into an output voltage.
+V3: DC power supply providing the required operating voltage for the amplifier.
+V1 & V2: Input voltage sources supplying the differential input signals to be amplified.
+
+## DC Analysis
+
+![WhatsApp Image 2025-03-07 at 20 50 21_ad74d463](https://github.com/user-attachments/assets/ec257077-1521-4afe-b89b-6082efa4ddb3)
+
+
+### **For M1 and M2:**
+- **Bias Current (I_ss):**  
+  *I_ss = P / V_DD = 3mW / 2.5V = 1.2mA*
+
+- **Load Resistor (R_D):**  
+  *R_D = (V_DD - V_OCM) / I_D1 = (2.5V - 1.4V) / 0.6mA = 1.833kΩ*
+
+- **R_SS :**  
+  *R_SS = V_P / I_SS = 0.3V / 1.2mA = 250Ω*
+   
+- **Drain-to-Source Voltage (V\(_{DS}\))** = 1.10V  
+- **Gate-to-Source Voltage (V\(_{GS}\))** = 1.00V  
+- **Threshold Voltage (V\(_{th}\))** = 0.474V  
+- **Overdrive Voltage (V\(_{OV}\))**:  
+  \[
+  V_{OV} = V_{GS} - V_{th} = 1.00V - 0.47V = 0.53V
+  \]  
+
+Since **V\(_{DS}\) > V\(_{OV}\)**, the MOSFET operates in the **saturation region**.  
+
+### **For M3:**
+1. **MOSFET Parameters (M3)**  
+   - \(V_{ds} = 0.3V\)  
+   - \(V_{gs} = 0.774V\)  
+   - \(V_{ov} = 0.274V\)  
+
+2. **Operating Region Check:**  
+   - Since \(V_{gd} < V_{th}\) and \(V_{ds} > V_{ov}\), **M3 is in saturation region**.
+
+---
+
+### **Output Voltage Verification:**
+- **Given Values:**  
+  \(V_{out} = 1.4V\), \(V_p = 0.3V\)  
+- **Theoretical Match:**  
+  The values match theoretical calculations.
+
+---
+
+### **Calculation for \( V_4 \):**
+\[
+V_4 = V_p + V_{th} = 0.3V + 0.47V = 0.774V
+\]
+
+This confirms that the theoretical and calculated values align correctly.
+
+## Transient analysis
+![WhatsApp Image 2025-03-07 at 20 51 11_af3382e6](https://github.com/user-attachments/assets/68934f5e-0d41-4f95-a39f-f599f747eb71)
+
+We can observe 180 degree phase shift between input and output voltage.
+
+$$
+A_v = \frac{V_{out}}{V_{in}} = \frac{1.55-1.25}{1.36-1.26} = 3
+$$
+
+Converting to decibels (dB):  
+
+$$
+\text{Gain (dB)} = 20 \log(3) = 9.54 \text{ dB}
+$$
+
+## AC analysis
+
+![WhatsApp Image 2025-03-07 at 20 52 00_c466d381](https://github.com/user-attachments/assets/5b501fa6-f7d6-41ff-baaf-18888de11dd8)
+
+$$
+\text{Gain (dB)} = 20 \log(3) = 9.54 \text{ dB}
+$$
+
+## Inference
+
+- The **differential amplifier** efficiently amplifies the difference between two input signals while suppressing common-mode interference, enhancing signal integrity.  
+- **Replacing the tail resistor with a current source** significantly improves the **common-mode rejection ratio (CMRR)**, leading to better performance and stability.  
+- **Increasing the MOSFET width** enhances the **gain** of the amplifier but comes at the cost of **higher power consumption**.  
+- The **bias point selection** plays a crucial role in determining the **gain, linearity, and power dissipation**, affecting the overall performance of the circuit.  
+- **Transient analysis** helps in understanding the amplifier’s response to **time-varying signals**, showcasing its dynamic behavior.  
+- **AC analysis** provides a detailed view of the **frequency response**, helping identify the amplifier’s **bandwidth and frequency-dependent limitations**.  
+
+
 
