@@ -164,8 +164,6 @@ Vicm_avg = **1.3241V**
 
 ## AC analysis
 
-### **AC Analysis of a Differential Amplifier**  
-
 AC analysis evaluates the **frequency response** of a differential amplifier, determining **gain, phase shift, and bandwidth**. Unlike transient analysis, it focuses on how the amplifier performs across different frequencies. By sweeping the input frequency, one can identify **distortions and performance limits**, making AC analysis crucial for **audio and communication applications**.
 
 ![WhatsApp Image 2025-03-08 at 00 14 35_a2551e70](https://github.com/user-attachments/assets/198b20b1-037c-430e-9fa9-29bc447b67d9)
